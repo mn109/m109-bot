@@ -1,0 +1,5 @@
+venv/
+.python-version
+.env
+test.py
+lines.txt
