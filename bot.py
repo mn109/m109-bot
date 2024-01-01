@@ -17,11 +17,8 @@ dp = Dispatcher()
 punchlines = [
     ["Если есть персонажи, то сюжет второстепенен.", "Хлеб насущный"],
     ["Релакс — после финала кубка; здесь нет других пенсионных планов.", "Саламандра"],
-    ["«Надо себя беречь» — довольно расхожий совет, но услышь его до проблем — и услышишь вдвойне.", "Саламандра"],
     ["Идеи не должны попахивать идиотизмом — они должны или не стесняясь разить им, или ходить по стеночке в пределах парадигмы.", "Иметь"]
 ]
-
-users = {}
 
 
 def get_random_line() -> str:
@@ -33,14 +30,11 @@ def get_random_line() -> str:
 @dp.message(CommandStart())
 async def process_start_command(message: Message):
     await message.answer(
-        'Этот бот отдаёт ссылки на релизы, '
+        'Этот бот отдаёт ссылки на релизы да страницы в соцсетях, '
         'гадает на строчках из треков '
-        'и принимает донаты.'
+        'и принимает донаты.\n'
+        'Список команд — под кнопкой Menu.'
         )
-    if message.from_user.id not in users:
-        users[message.from_user.id] = {
-            'playing': False
-        }
 
 
 apple_music_button = InlineKeyboardButton(
@@ -63,9 +57,30 @@ yandex_music_button = InlineKeyboardButton(
     text='Яндекс.Музыка',
     url='https://music.yandex.ru/artist/4703830'
 )
-youtube_button = InlineKeyboardButton(
+yandex_tips_button = InlineKeyboardButton(
+    text='Яндекс.Чаевые',
+    url='https://tips.yandex.ru/guest/payment/5730560'
+)
+youtube_channel_button = InlineKeyboardButton(
     text='YouTube',
     url='https://www.youtube.com/@mxxxxxxxxx'
+)
+youtube_music_button = InlineKeyboardButton(
+    text='YouTube Music',
+    url='https://music.youtube.com/channel/UCC1p_NyxmnshXCABr5tlmsg'
+)
+
+donations_keyboard = InlineKeyboardMarkup(
+    inline_keyboard=[
+        [yandex_tips_button]
+    ]
+)
+
+social_keyboard = InlineKeyboardMarkup(
+    inline_keyboard=[
+        [vk_public_button],
+        [youtube_channel_button]
+    ]
 )
 
 streaming_keyboard = InlineKeyboardMarkup(
@@ -73,14 +88,8 @@ streaming_keyboard = InlineKeyboardMarkup(
         [apple_music_button],
         [spotify_button],
         [vk_music_button],
+        [youtube_music_button],
         [yandex_music_button]
-    ]
-)
-
-social_keyboard = InlineKeyboardMarkup(
-    inline_keyboard=[
-        [vk_public_button],
-        [youtube_button]
     ]
 )
 
@@ -95,23 +104,9 @@ async def process_listen_command(message: Message):
 
 @dp.message(Command(commands='divine'))
 async def process_divine_command(message: Message):
-    if not users[message.from_user.id]['playing']:
-        await message.answer(
-            'Что же, давай погадаем. '
-            'Лови рандомную строчку из трека '
-            'и толкуй её применительно к своей жизненной ситуации.'
-            )
-        time.sleep(3)
-        await message.answer(
-            get_random_line()
-            )
-        users[message.from_user.id]['playing'] = True
-
-    elif users[message.from_user.id]['playing']:
-        await message.answer(
-            'Сорри, но гадание на строчках треков — серьёзное дело. '
-            'Погадали — и будет. '
-            'Подумай над строчкой, которая тебе выпала. '
+    time.sleep(1)
+    await message.answer(
+        get_random_line()
         )
 
 
@@ -126,19 +121,24 @@ async def process_subscribe_command(message: Message):
 @dp.message(Command(commands='support'))
 async def process_support_command(message: Message):
     await message.answer(
-        'Спасибо.\n'
-        'MNR: ...\n'
-        'BTC: ...\n'
-        'ETH:...'
+        text='Спасибо!',
+        reply_markup=donations_keyboard
         )
 
 
 @dp.message()
 async def process_other_answers(message: Message):
     await message.answer(
-        'Нет-нет, я только выдаю ссылки на стриминги да официальные страницы, '
-        'помогаю гадать на строчках из треков '
-        'и принимаю поддержку.'
+        'Увы, бот не понял команду — '
+        'он умеет только выдавать ссылки на стриминги да официальные страницы, '
+        'помогает гадать на строчках из треков '
+        'и принимает донаты.\n'
+        'Вот доступные команды: \n'
+        '/listen — слушать треки на стриминговых сервисах\n'
+        '/divine — гадать на строчках из треков\n'
+        '/subscribe — подписаться на страницы\n'
+        '/support — закинуть денег\n'
+        'Список доступен под кнопкой Menu.'
         )
 
 
