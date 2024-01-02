@@ -1,7 +1,6 @@
 from aiogram import Bot, Dispatcher
 from aiogram.filters import ChatMemberUpdatedFilter, Command, CommandStart, MEMBER
 from aiogram.types import ChatMemberUpdated, InlineKeyboardButton, InlineKeyboardMarkup, Message
-from aiogram.utils.keyboard import InlineKeyboardBuilder
 from environs import Env
 import random
 import time
@@ -15,24 +14,32 @@ bot = Bot(token=BOT_TOKEN)
 dp = Dispatcher()
 
 punchlines = [
-    ["Если есть персонажи, то сюжет второстепенен.", "Хлеб насущный"],
-    ["Релакс — после финала кубка; здесь нет других пенсионных планов.", "Саламандра"],
-    ["Идеи не должны попахивать идиотизмом — они должны или не стесняясь разить им, или ходить по стеночке в пределах парадигмы.", "Иметь"]
+    ["Если есть персонажи, то сюжет второстепенен.", "Хлеб насущный", "https://youtu.be/C1DWUpiuUJ4"],
+    ["Если б награду давали на шару, она б не ценилась нисколько.", "Не подведи себя сам", "https://youtu.be/QeNoqtzEkx8"],
+    ["Перед тем как стать опытным, ты подопытный.", "Исповедь", "https://youtu.be/luRD0QK6a2I"],
+    ["Не можешь стать учителем — стань уроком.", "Полубог-полуживотное", "https://youtu.be/B-hMu2j9rLw"],
+    ["Победа — полдела, дальше — больше.", "Викрамадитья", "https://youtu.be/lVQEURNbExA"],
+    ["Мальчик боится мяча, пока не разобьют лицо.", "Впритык", "https://youtu.be/6w1z0BIt2NM"],
+  #  [],
+    ["Столько людей полыхнуло впустую, как пух — в каком качестве тебя приглашают к столу?", "С любовью", "https://youtu.be/HknPbkMPbHI"],
+    ["Релакс — после финала кубка; здесь нет других пенсионных планов.", "Саламандра", "https://youtu.be/MsaSMWoEzUg"],
+    ["Идеи не должны попахивать идиотизмом — они должны или не стесняясь разить им, или ходить по стеночке в пределах парадигмы.", "Иметь", "https://youtu.be/fWWpglvBP0M"]
 ]
 
 
 def get_random_line() -> str:
     divination = random.choice(punchlines)
-    ready_divination = f"{divination[0]}\n\n«{divination[1]}»"
+    ready_divination = f"{divination[0]}\n\n\n\n\n«{divination[1]}»\n{divination[2]}"
     return ready_divination
 
 
 @dp.message(CommandStart())
 async def process_start_command(message: Message):
     await message.answer(
-        'Этот бот отдаёт ссылки на релизы да страницы в соцсетях, '
-        'гадает на строчках из треков '
-        'и принимает донаты.\n'
+        'Этот бот отдаёт ссылки на релизы, видео и страницы М в соцсетях, '
+        'гадает на строчках из его треков ',
+        'сообщает о перспективах выхода новой музыки'
+        'и принимает помощь.\n'
         'Список команд — под кнопкой Menu.'
         )
 
@@ -50,7 +57,7 @@ vk_music_button = InlineKeyboardButton(
     url='https://vk.cc/8Ekyio'
 )
 vk_public_button = InlineKeyboardButton(
-    text='VK',
+    text='Паблик в VK',
     url='https://vk.com/mxxxxxxxxx'
 )
 yandex_music_button = InlineKeyboardButton(
@@ -62,8 +69,12 @@ yandex_tips_button = InlineKeyboardButton(
     url='https://tips.yandex.ru/guest/payment/5730560'
 )
 youtube_channel_button = InlineKeyboardButton(
-    text='YouTube',
+    text='YouTube-канал',
     url='https://www.youtube.com/@mxxxxxxxxx'
+)
+youtube_playlist_button = InlineKeyboardButton(
+    text='Плейлист на YouTube',
+    url='https://www.youtube.com/playlist?list=PLlL8gwnKFC8oPdckcTSvjSZK5OLqkebLM'
 )
 youtube_music_button = InlineKeyboardButton(
     text='YouTube Music',
@@ -93,12 +104,38 @@ streaming_keyboard = InlineKeyboardMarkup(
     ]
 )
 
+watch_keyboard = InlineKeyboardMarkup(
+    inline_keyboard=[
+        [youtube_playlist_button]
+    ]
+)
+
 
 @dp.message(Command(commands='listen'))
 async def process_listen_command(message: Message):
     await message.answer(
         text='Ссылки на стриминговые сервисы:',
         reply_markup=streaming_keyboard
+        )
+
+
+@dp.message(Command(commands='learn'))
+async def process_learn_command(message: Message):
+    await message.answer(
+        'У меня порой интересуются, выпущу ли новые треки, '
+        'и если да, то когда это счастье наступит. '
+        'Песни выйдут, когда стихнет стрельба — '
+        'я слышал доводы, что каждый должен заниматься своим делом, '
+        'но, к счастью, могу себе позволить не выпускать музыку, '
+        'пока люди натурально гибнут.'
+        )
+
+
+@dp.message(Command(commands='watch'))
+async def process_watch_command(message: Message):
+    await message.answer(
+        text='Плейлист с видео:',
+        reply_markup=watch_keyboard
         )
 
 
@@ -110,8 +147,8 @@ async def process_divine_command(message: Message):
         )
 
 
-@dp.message(Command(commands='subscribe'))
-async def process_subscribe_command(message: Message):
+@dp.message(Command(commands='follow'))
+async def process_follow_command(message: Message):
     await message.answer(
         text='Подписаться:',
         reply_markup=social_keyboard
@@ -121,7 +158,18 @@ async def process_subscribe_command(message: Message):
 @dp.message(Command(commands='support'))
 async def process_support_command(message: Message):
     await message.answer(
-        text='Спасибо!',
+        text='Привет, это Миша. '
+        'Рад, что песни отзываются настолько, '
+        'что возникает желание меня поддержать! '
+        'Под этим сообщением — ссылка на Яндекс.Чаевые.\n'
+        'Но особо ценной — бесценной! — помощью будет, '
+        'если тем или иным образом устроишь мне собеседование '
+        'в какую-нибудь компанию на должность бэкенд-разработчика на Python — '
+        'я сам написал этого бота-визитку, '
+        'использовав библиотеку aiogram, '
+        'чтобы продемонстрировать верхушку айсберга '
+        'моих невероятных навыков программирования :)\n'
+        'Почта: ban.gully.0o@icloud.com',
         reply_markup=donations_keyboard
         )
 
@@ -129,16 +177,8 @@ async def process_support_command(message: Message):
 @dp.message()
 async def process_other_answers(message: Message):
     await message.answer(
-        'Увы, бот не понял команду — '
-        'он умеет только выдавать ссылки на стриминги да официальные страницы, '
-        'помогает гадать на строчках из треков '
-        'и принимает донаты.\n'
-        'Вот доступные команды: \n'
-        '/listen — слушать треки на стриминговых сервисах\n'
-        '/divine — гадать на строчках из треков\n'
-        '/subscribe — подписаться на страницы\n'
-        '/support — закинуть денег\n'
-        'Список доступен под кнопкой Menu.'
+        'Увы, бот не понял команду. '
+        'Список команд доступен по кнопке Menu.'
         )
 
 
