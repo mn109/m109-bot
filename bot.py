@@ -1,6 +1,6 @@
-from aiogram import Bot, Dispatcher
+from aiogram import Bot, Dispatcher, F
 from aiogram.filters import ChatMemberUpdatedFilter, Command, CommandStart, MEMBER
-from aiogram.types import ChatMemberUpdated, InlineKeyboardButton, InlineKeyboardMarkup, Message
+from aiogram.types import ChatMemberUpdated, InlineKeyboardButton, InlineKeyboardMarkup, KeyboardButton, Message, ReplyKeyboardMarkup
 from environs import Env
 import random
 import time
@@ -12,6 +12,24 @@ BOT_TOKEN = env('BOT_TOKEN')
 
 bot = Bot(token=BOT_TOKEN)
 dp = Dispatcher()
+
+
+button_1 = KeyboardButton(text="Слушать треки")
+button_2 = KeyboardButton(text="Смотреть видео")
+button_3 = KeyboardButton(text="Узнать новости")
+button_4 = KeyboardButton(text="Гадать на строчках")
+button_5 = KeyboardButton(text="Подписаться")
+button_6 = KeyboardButton(text="Поддержать")
+button_7 = KeyboardButton(text="Заказать бота")
+
+
+keyboard = ReplyKeyboardMarkup(
+    keyboard=[
+        [button_1, button_2],
+        [button_3, button_4],
+        [button_5, button_6]
+        ],
+        resize_keyboard=True)
 
 punchlines = [
     ["Если есть персонажи, то сюжет второстепенен.", "Хлеб насущный", "https://youtu.be/C1DWUpiuUJ4"],
@@ -46,9 +64,10 @@ async def process_start_command(message: Message):
         'Он отдаёт ссылки на релизы, видео и аккаунты в соцсетях, '
         'гадает на строчках из треков, '
         'отвечает на слегка набивший мне оскомину вопрос '
-        'о перспективах и сроках выхода новой музыки '
-        'и принимает помощь от благодарных слушателей.\n'
-        'Полный список команд — под кнопкой Menu.'
+        'о перспективах и сроках выхода новой музыки, '
+        'а также принимает помощь от благодарных слушателей.\n'
+        'Полный список команд — под кнопкой Menu.',
+        reply_markup=keyboard
         )
 
 
@@ -138,7 +157,8 @@ watch_keyboard = InlineKeyboardMarkup(
 )
 
 
-@dp.message(Command(commands='listen'))
+@dp.message(F.text == "Слушать треки")
+@dp.message(Command(commands="listen"))
 async def process_listen_command(message: Message):
     await message.answer(
         text='Ссылки на стриминговые сервисы:',
@@ -146,7 +166,8 @@ async def process_listen_command(message: Message):
         )
 
 
-@dp.message(Command(commands='learn'))
+@dp.message(F.text == "Узнать новости")
+@dp.message(Command(commands="learn"))
 async def process_learn_command(message: Message):
     await message.answer(
         'У меня порой интересуются, выпущу ли новые треки, '
@@ -160,6 +181,7 @@ async def process_learn_command(message: Message):
         )
 
 
+@dp.message(F.text == "Смотреть видео")
 @dp.message(Command(commands='watch'))
 async def process_watch_command(message: Message):
     await message.answer(
@@ -168,6 +190,7 @@ async def process_watch_command(message: Message):
         )
 
 
+@dp.message(F.text == "Гадать на строчках")
 @dp.message(Command(commands='divine'))
 async def process_divine_command(message: Message):
     time.sleep(0.5)
@@ -176,7 +199,8 @@ async def process_divine_command(message: Message):
         )
 
 
-@dp.message(Command(commands='follow'))
+@dp.message(F.text == "Подписаться")
+@dp.message(Command(commands="follow"))
 async def process_follow_command(message: Message):
     await message.answer(
         text='Подписаться:',
@@ -184,18 +208,18 @@ async def process_follow_command(message: Message):
         )
 
 
-@dp.message(Command(commands='donate'))
+@dp.message(F.text == "Поддержать")
+@dp.message(Command(commands="donate"))
 async def process_donate_command(message: Message):
     await message.answer(
         text='Рад, что песни отзываются настолько, '
-        'что возникает желание меня поддержать.\n'
-        'Спасибо.\n'
-        'Миша',
+        'что возникает желание меня поддержать. '
+        'Спасибо. Миша',
         reply_markup=donations_keyboard
         )
 
 
-@dp.message(Command(commands='order'))
+@dp.message(Command(commands="order"))
 async def process_order_command(message: Message):
     await message.answer(
         text='Привет, это Миша. '
