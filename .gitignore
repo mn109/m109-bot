@@ -1,5 +1,5 @@
+__pycache__/
 venv/
 .python-version
 .env
-test.py
-lines.txt
+fullest.py
