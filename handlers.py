@@ -43,7 +43,7 @@ async def process_learn_command(message: Message):
 
 
 @router.message(F.text == "Смотреть видео")
-@router.message(Command(commands='watch'))
+@router.message(Command(commands="watch"))
 async def process_watch_command(message: Message):
     await message.answer(
         data.WATCH_MESSAGE,
@@ -52,7 +52,7 @@ async def process_watch_command(message: Message):
 
 
 @router.message(F.text == "Гадать на строчках")
-@router.message(Command(commands='divine'))
+@router.message(Command(commands="divine"))
 async def process_divine_command(message: Message):
     time.sleep(0.5)
     await message.answer(
