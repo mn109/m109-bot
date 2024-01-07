@@ -54,7 +54,9 @@ async def process_watch_command(message: Message):
 @router.message(F.text == "Гадать на строчках")
 @router.message(Command(commands="divine"))
 async def process_divine_command(message: Message):
-    time.sleep(0.5)
+    time.sleep(1)
+    await message.answer("☴")
+    time.sleep(1)
     await message.answer(
         get_random_line()
         )
