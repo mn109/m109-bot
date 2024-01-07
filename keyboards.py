@@ -63,6 +63,10 @@ yandex_tips_button = InlineKeyboardButton(
     text="Яндекс.Чаевые",
     url="https://tips.yandex.ru/guest/payment/5730560"
 )
+youtube_button = InlineKeyboardButton(
+    text="YouTube",
+    url="https://www.youtube.com/channel/UCC1p_NyxmnshXCABr5tlmsg"
+)
 youtube_channel_button = InlineKeyboardButton(
     text="Канал в YouTube",
     url="https://www.youtube.com/@mxxxxxxxxx"
@@ -92,6 +96,7 @@ streaming_keyboard = InlineKeyboardMarkup(
         [apple_music_button],
         [spotify_button],
         [vk_music_button],
+        [youtube_button],
         [youtube_music_button],
         [yandex_music_button]
     ]
