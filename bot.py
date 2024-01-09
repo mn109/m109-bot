@@ -1,16 +1,10 @@
 from aiogram import Bot, Dispatcher
-#from environs import Env
 import asyncio
 import handlers
 from config import Config, load_config
 
 config: Config = load_config()
 TOKEN: str = config.tg_bot.token
-
-#env = Env()
-#env.read_env()
-
-#TOKEN = env('TOKEN')
 
 
 async def main():

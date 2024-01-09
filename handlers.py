@@ -84,7 +84,7 @@ async def process_donate_command(message: Message):
 async def process_order_command(message: Message):
     await message.answer(
         data.ORDER_MESSAGE,
-        reply_markup=keyboards.keyboard
+        reply_markup=keyboards.dev_keyboard
     )
 
 

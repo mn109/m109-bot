@@ -27,6 +27,10 @@ breaking_and_entering_button = InlineKeyboardButton(
     text="Клип «Кража со взломом»",
     url="https://youtu.be/sg7Vig3pFOk"
 )
+github_button = InlineKeyboardButton(
+    text="Код бота на GitHub",
+    url="https://github.com/mn109/m109-bot"
+)
 radical_poetry_live_button = InlineKeyboardButton(
     text="«Радикальная поэзия» (Live)",
     url="https://youtu.be/2eBvgMaZ73Y"
@@ -76,6 +80,11 @@ youtube_music_button = InlineKeyboardButton(
     url="https://music.youtube.com/channel/UCC1p_NyxmnshXCABr5tlmsg"
 )
 
+dev_keyboard = InlineKeyboardMarkup(
+    inline_keyboard=[
+        [github_button]
+    ]
+)
 
 donations_keyboard = InlineKeyboardMarkup(
     inline_keyboard=[
