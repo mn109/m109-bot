@@ -14,7 +14,7 @@ DONATE_MESSAGE = (
 )
 
 FOLLOW_MESSAGE = (
-    "Подписаться:"
+    "Страницы в соцсетях:"
 )
 
 LEARN_MESSAGE = (
@@ -29,7 +29,7 @@ LEARN_MESSAGE = (
 )
 
 LISTEN_MESSAGE = (
-    "Ссылки на стриминговые сервисы:"
+    "Стриминговые сервисы:"
 )
 
 ORDER_MESSAGE = (

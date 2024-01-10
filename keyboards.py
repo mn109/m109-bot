@@ -71,10 +71,6 @@ youtube_button = InlineKeyboardButton(
     text="YouTube",
     url="https://www.youtube.com/channel/UCC1p_NyxmnshXCABr5tlmsg"
 )
-youtube_channel_button = InlineKeyboardButton(
-    text="Канал в YouTube",
-    url="https://www.youtube.com/@mxxxxxxxxx"
-)
 youtube_music_button = InlineKeyboardButton(
     text="YouTube Music",
     url="https://music.youtube.com/channel/UCC1p_NyxmnshXCABr5tlmsg"
@@ -95,8 +91,7 @@ donations_keyboard = InlineKeyboardMarkup(
 social_keyboard = InlineKeyboardMarkup(
     inline_keyboard=[
         [telegram_channel_button],
-        [vk_public_button],
-        [youtube_channel_button]
+        [vk_public_button]
     ]
 )
 
