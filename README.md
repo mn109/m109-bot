@@ -4,4 +4,4 @@ An independent music artist, a hater of all forms of social media and an aspirin
 
 I used [aiogram](https://aiogram.dev/).
 
-Check the bot out: [@m109_bot](www.t.me/m109_bot)
+Check the bot out: [@m109_bot](https://www.t.me/m109_bot)
