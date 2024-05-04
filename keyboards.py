@@ -7,7 +7,6 @@ button_3 = KeyboardButton(text="Узнать новости")
 button_4 = KeyboardButton(text="Гадать на строчках")
 button_5 = KeyboardButton(text="Подписаться")
 button_6 = KeyboardButton(text="Поддержать")
-button_7 = KeyboardButton(text="Заказать бота")
 
 keyboard = ReplyKeyboardMarkup(
     keyboard=[

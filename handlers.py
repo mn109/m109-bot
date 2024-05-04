@@ -80,14 +80,6 @@ async def process_donate_command(message: Message):
         )
 
 
-@router.message(Command(commands="order"))
-async def process_order_command(message: Message):
-    await message.answer(
-        data.ORDER_MESSAGE,
-        reply_markup=keyboards.dev_keyboard
-    )
-
-
 @router.message()
 async def process_other_answers(message: Message):
     await message.answer(
