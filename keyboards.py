@@ -60,11 +60,11 @@ vk_public_button = InlineKeyboardButton(
     url="https://vk.com/mxxxxxxxxx"
 )
 yandex_music_button = InlineKeyboardButton(
-    text="Яндекс.Музыка",
+    text="Яндекс Музыка",
     url="https://music.yandex.ru/artist/4703830"
 )
 yandex_tips_button = InlineKeyboardButton(
-    text="Яндекс.Чаевые",
+    text="Яндекс Чаевые",
     url="https://tips.yandex.ru/guest/payment/5730560"
 )
 youtube_button = InlineKeyboardButton(
