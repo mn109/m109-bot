@@ -4,6 +4,7 @@ from aiogram.types import Message
 import keyboards
 import random
 import time
+import data
 import json
 
 router = Router()
