@@ -4,16 +4,16 @@ from aiogram.types import Message
 import keyboards
 import random
 import time
-import data
+import json
 
 router = Router()
 
-punchlines = data.punchlines
-
+with open('punchlines.json', 'r', encoding='utf-8') as f:
+    punchlines = json.load(f)
 
 def get_random_line() -> str:
-    divination = random.choice(data.punchlines)
-    ready_divination = f"{divination[0]}\n\n\n«{divination[1]}»\n{divination[2]}"
+    divination = random.choice(punchlines)
+    ready_divination = f"{divination['punchline']}\n\n\n«{divination['track_title']}»\n{divination['track_YouTube_link']}"
     return ready_divination
 
 
