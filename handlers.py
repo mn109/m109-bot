@@ -30,16 +30,17 @@ def get_random_line() -> str:
 
 @router.message(CommandStart())
 async def process_start_command(message: Message):
-    await message.answer(data.START_MESSAGE,
-                         reply_markup=keyboards.keyboard
-                         )
+    await message.answer(
+        START_MESSAGE,
+        reply_markup=keyboards.keyboard
+        )
 
 
 @router.message(F.text == "Слушать треки")
 @router.message(Command(commands="listen"))
 async def process_listen_command(message: Message):
     await message.answer(
-        data.LISTEN_MESSAGE,
+        LISTEN_MESSAGE,
         reply_markup=keyboards.streaming_keyboard
         )
 
@@ -48,7 +49,7 @@ async def process_listen_command(message: Message):
 @router.message(Command(commands="learn"))
 async def process_learn_command(message: Message):
     await message.answer(
-        data.LEARN_MESSAGE,
+        LEARN_MESSAGE,
         reply_markup=keyboards.keyboard
         )
 
@@ -57,7 +58,7 @@ async def process_learn_command(message: Message):
 @router.message(Command(commands="watch"))
 async def process_watch_command(message: Message):
     await message.answer(
-        data.WATCH_MESSAGE,
+        WATCH_MESSAGE,
         reply_markup=keyboards.watch_keyboard
         )
 
@@ -77,7 +78,7 @@ async def process_divine_command(message: Message):
 @router.message(Command(commands="follow"))
 async def process_follow_command(message: Message):
     await message.answer(
-        data.FOLLOW_MESSAGE,
+        FOLLOW_MESSAGE,
         reply_markup=keyboards.social_keyboard
         )
 
@@ -86,7 +87,7 @@ async def process_follow_command(message: Message):
 @router.message(Command(commands="donate"))
 async def process_donate_command(message: Message):
     await message.answer(
-        data.DONATE_MESSAGE,
+        DONATE_MESSAGE,
         reply_markup=keyboards.donations_keyboard
         )
 
@@ -94,5 +95,5 @@ async def process_donate_command(message: Message):
 @router.message()
 async def process_other_answers(message: Message):
     await message.answer(
-        data.OTHER_MESSAGE
+        OTHER_MESSAGE
         )
