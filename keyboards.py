@@ -2,9 +2,9 @@ from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup, KeyboardBu
 import json
 
 with open('keyboards.json', 'r', encoding='utf-8') as f:
-    keyboards = json.load(f)
+    data = json.load(f)
 
-buttons = keyboards["buttons"]
+buttons = data["buttons"]
 
 button_1 = KeyboardButton(text=buttons["listen"])
 button_2 = KeyboardButton(text=buttons["watch"])
@@ -77,12 +77,6 @@ youtube_button = InlineKeyboardButton(
 youtube_music_button = InlineKeyboardButton(
     text=buttons["youtube_music"]["text"],
     url=buttons["youtube_music"]["url"]
-)
-
-dev_keyboard = InlineKeyboardMarkup(
-    inline_keyboard=[
-        [github_button]
-    ]
 )
 
 donations_keyboard = InlineKeyboardMarkup(
