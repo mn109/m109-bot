@@ -3,6 +3,7 @@ venv/
 .python-version
 .env
 .gitignore
+keyboards.json
 messages.json
 punchlines.json
 todo.txt

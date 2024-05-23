@@ -1,78 +1,82 @@
 from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup, KeyboardButton, ReplyKeyboardMarkup
+import json
 
+with open('keyboards.json', 'r', encoding='utf-8') as f:
+    keyboards = json.load(f)
 
-button_1 = KeyboardButton(text="Слушать треки")
-button_2 = KeyboardButton(text="Смотреть видео")
-button_3 = KeyboardButton(text="Узнать новости")
-button_4 = KeyboardButton(text="Гадать на строчках")
-button_5 = KeyboardButton(text="Подписаться")
-button_6 = KeyboardButton(text="Поддержать")
+buttons = keyboards["buttons"]
+
+button_1 = KeyboardButton(text=buttons["listen"])
+button_2 = KeyboardButton(text=buttons["watch"])
+button_3 = KeyboardButton(text=buttons["learn"])
+button_4 = KeyboardButton(text=buttons["divine"])
+button_5 = KeyboardButton(text=buttons["follow"])
+button_6 = KeyboardButton(text=buttons["donate"])
 
 keyboard = ReplyKeyboardMarkup(
     keyboard=[
         [button_1, button_2],
         [button_3, button_4],
         [button_5, button_6]
-        ],
+    ],
     resize_keyboard=True
-    )
-
+)
 
 apple_music_button = InlineKeyboardButton(
-    text="Apple Music",
-    url="https://music.apple.com/ru/artist/%D0%BC/1471116485"
+    text=buttons["apple_music"]["text"],
+    url=buttons["apple_music"]["url"]
 )
 breaking_and_entering_button = InlineKeyboardButton(
-    text="Клип «Кража со взломом»",
-    url="https://youtu.be/sg7Vig3pFOk"
+    text=buttons["breaking_and_entering"]["text"],
+    url=buttons["breaking_and_entering"]["url"]
 )
 github_button = InlineKeyboardButton(
-    text="Код бота на GitHub",
-    url="https://github.com/mn109/m109-bot"
+    text=buttons["github"]["text"],
+    url=buttons["github"]["url"]
 )
 radical_poetry_live_button = InlineKeyboardButton(
-    text="«Радикальная поэзия» (Live)",
-    url="https://youtu.be/2eBvgMaZ73Y"
+    text=buttons["radical_poetry_live"]["text"],
+    url=buttons["radical_poetry_live"]["url"]
 )
 spotify_button = InlineKeyboardButton(
-    text="Spotify",
-    url="https://open.spotify.com/artist/5HUVgeazK25dgyTE0dMKFN"
+    text=buttons["spotify"]["text"],
+    url=buttons["spotify"]["url"]
 )
 suppose_button = InlineKeyboardButton(
-    text="Клип «А вдруг»",
-    url="https://youtu.be/1nrV5j6f-Bo"
+    text=buttons["suppose"]["text"],
+    url=buttons["suppose"]["url"]
 )
 suppose_live_button = InlineKeyboardButton(
-    text="«А вдруг» (Live)",
-    url="https://youtu.be/TE9UFNdOgx8"
+    text=buttons["suppose_live"]["text"],
+    url=buttons["suppose_live"]["url"]
 )
 telegram_channel_button = InlineKeyboardButton(
-    text="Канал в Telegram",
-    url="https://t.me/mxxxxgram"
+    text=buttons["telegram_channel"]["text"],
+    url=buttons["telegram_channel"]["url"]
 )
 vk_music_button = InlineKeyboardButton(
-    text="VK Музыка",
-    url="https://vk.cc/8Ekyio"
+    text=buttons["vk_music"]["text"],
+    url=buttons["vk_music"]["url"]
 )
 vk_public_button = InlineKeyboardButton(
-    text="Паблик в VK",
-    url="https://vk.com/mxxxxxxxxx"
+    text=buttons["vk_public"]["text"],
+    url=buttons["vk_public"]["url"]
 )
 yandex_music_button = InlineKeyboardButton(
-    text="Яндекс Музыка",
-    url="https://music.yandex.ru/artist/4703830"
+    text=buttons["yandex_music"]["text"],
+    url=buttons["yandex_music"]["url"]
 )
 yandex_tips_button = InlineKeyboardButton(
-    text="Яндекс Чаевые",
-    url="https://tips.yandex.ru/guest/payment/5730560"
+    text=buttons["yandex_tips"]["text"],
+    url=buttons["yandex_tips"]["url"]
 )
 youtube_button = InlineKeyboardButton(
-    text="YouTube",
-    url="https://www.youtube.com/channel/UCC1p_NyxmnshXCABr5tlmsg"
+    text=buttons["youtube"]["text"],
+    url=buttons["youtube"]["url"]
 )
 youtube_music_button = InlineKeyboardButton(
-    text="YouTube Music",
-    url="https://music.youtube.com/channel/UCC1p_NyxmnshXCABr5tlmsg"
+    text=buttons["youtube_music"]["text"],
+    url=buttons["youtube_music"]["url"]
 )
 
 dev_keyboard = InlineKeyboardMarkup(
