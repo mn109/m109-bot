@@ -30,10 +30,6 @@ breaking_and_entering_button = InlineKeyboardButton(
     text=buttons["breaking_and_entering"]["text"],
     url=buttons["breaking_and_entering"]["url"]
 )
-github_button = InlineKeyboardButton(
-    text=buttons["github"]["text"],
-    url=buttons["github"]["url"]
-)
 radical_poetry_live_button = InlineKeyboardButton(
     text=buttons["radical_poetry_live"]["text"],
     url=buttons["radical_poetry_live"]["url"]
