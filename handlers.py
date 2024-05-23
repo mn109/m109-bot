@@ -4,13 +4,23 @@ from aiogram.types import Message
 import keyboards
 import random
 import time
-import data
 import json
 
 router = Router()
 
 with open('punchlines.json', 'r', encoding='utf-8') as f:
     punchlines = json.load(f)
+
+with open('messages.json', 'r', encoding='utf-8') as f:
+    messages = json.load(f)
+
+START_MESSAGE = messages["START_MESSAGE"]
+DONATE_MESSAGE = messages["DONATE_MESSAGE"]
+FOLLOW_MESSAGE = messages["FOLLOW_MESSAGE"]
+LEARN_MESSAGE = messages["LEARN_MESSAGE"]
+LISTEN_MESSAGE = messages["LISTEN_MESSAGE"]
+OTHER_MESSAGE = messages["OTHER_MESSAGE"]
+WATCH_MESSAGE = messages["WATCH_MESSAGE"]
 
 def get_random_line() -> str:
     divination = random.choice(punchlines)

@@ -3,4 +3,6 @@ venv/
 .python-version
 .env
 .gitignore
+messages.json
 punchlines.json
+todo.txt
